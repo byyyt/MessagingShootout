@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Concurrent;
+using System.Threading.Tasks.Dataflow;
 
-namespace MessagingShootout.Scenarios
+namespace MessagingShootout.Scenarios.Dataflow
 {
-    [Scenario("Concurrent Queue with 1 Consumer")]
-    public class ConcurrentQueueScenario : SingleConsumerScenario<Message>
+    [Scenario("Dataflow BufferBlock with 1 Consumer")]
+    public class DataflowBufferBlockScenario : SingleConsumerScenario<Message>
     {
-        private readonly ConcurrentQueue<Message> _queue = new ConcurrentQueue<Message>();
+        private readonly BufferBlock<Message> _block = new BufferBlock<Message>();
 
         public override void Publish(Message message)
         {
-            _queue.Enqueue(message);
+            _block.Post(message);
         }
 
         protected override void ConsumerOne()
@@ -20,7 +20,7 @@ namespace MessagingShootout.Scenarios
 
             while (true)
             {
-                var received = _queue.TryDequeue(out msg);
+                var received = _block.TryReceive(out msg);
                 if (received)
                 {
                     count++;

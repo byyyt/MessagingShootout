@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
-namespace MessagingShootout.Scenarios
+namespace MessagingShootout.Scenarios.ConcurrentQueue
 {
-    [Scenario("Locked Queue with 1 Consumer")]
-    public class LockedQueueScenario : SingleConsumerScenario<Message>
+    [Scenario("Concurrent Queue with 1 Consumer")]
+    public class ConcurrentQueueScenario : SingleConsumerScenario<Message>
     {
-        private readonly LockedQueue<Message> _queue = new LockedQueue<Message>();
+        private readonly ConcurrentQueue<Message> _queue = new ConcurrentQueue<Message>();
 
         public override void Publish(Message message)
         {

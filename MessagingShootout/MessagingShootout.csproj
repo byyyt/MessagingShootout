@@ -45,19 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scenarios\ConcurrentQueueScenario.cs" />
-    <Compile Include="Scenarios\DataflowBufferBlockForkJoinScenario.cs" />
-    <Compile Include="Scenarios\DataflowBufferBlockScenario.cs" />
-    <Compile Include="Scenarios\DataflowJoinBlockForkJoinScenario.cs" />
-    <Compile Include="Scenarios\LockedQueue.cs" />
+    <Compile Include="Scenarios\ConcurrentQueue\ConcurrentQueueScenario.cs" />
+    <Compile Include="Scenarios\Dataflow\DataflowBufferBlockForkJoinScenario.cs" />
+    <Compile Include="Scenarios\Dataflow\DataflowActionBlockScenario.cs" />
+    <Compile Include="Scenarios\Dataflow\DataflowBufferBlockScenario.cs" />
+    <Compile Include="Scenarios\Dataflow\DataflowJoinBlockForkJoinScenario.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenario.cs" />
     <Compile Include="ScenarioAttribute.cs" />
-    <Compile Include="Scenarios\ConcurrentQueueForkJoinScenario.cs" />
-    <Compile Include="Scenarios\LockedQueueForkJoinScenario.cs" />
-    <Compile Include="Scenarios\LockedQueueScenario.cs" />
+    <Compile Include="Scenarios\ConcurrentQueue\ConcurrentQueueForkJoinScenario.cs" />
+    <Compile Include="Scenarios\LockedQueue\LockedQueue.cs" />
+    <Compile Include="Scenarios\LockedQueue\LockedQueueForkJoinScenario.cs" />
+    <Compile Include="Scenarios\LockedQueue\LockedQueueScenario.cs" />
     <Compile Include="SingleConsumerScenario.cs" />
     <Compile Include="ThreeConsumerForkJoinScenario.cs" />
   </ItemGroup>

@@ -55,7 +55,7 @@ namespace MessagingShootout
             scenario.Publish(new Message { Value = "test", Terminate = true });
             count++;
 
-            Console.WriteLine("Producer sent {0} messages.", count);
+            Console.WriteLine("Producer sent {0:#,#;;0} messages.", count);
 
             scenario.ScenarioCompletedTask.Wait();
             sw.Stop();

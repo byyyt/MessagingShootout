@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
-namespace MessagingShootout.Scenarios
+namespace MessagingShootout.Scenarios.ConcurrentQueue
 {
-    [Scenario("Locked Queue with 3 Fork/Join Consumers")]
-    public class LockedQueueForkJoinScenario : ThreeConsumerForkJoinScenario<Message>
+    [Scenario("Concurrent Queue with 3 Fork/Join Consumers")]
+    public class ConcurrentQueueForkJoinScenario : ThreeConsumerForkJoinScenario<Message>
     {
-        private readonly LockedQueue<Message> _consumerOneIn = new LockedQueue<Message>();
-        private readonly LockedQueue<Message> _consumerTwoIn = new LockedQueue<Message>();
+        private readonly ConcurrentQueue<Message> _consumerOneIn = new ConcurrentQueue<Message>();
+        private readonly ConcurrentQueue<Message> _consumerTwoIn = new ConcurrentQueue<Message>();
 
-        private readonly LockedQueue<Message> _consumerOneOut = new LockedQueue<Message>();
-        private readonly LockedQueue<Message> _consumerTwoOut = new LockedQueue<Message>();
+        private readonly ConcurrentQueue<Message> _consumerOneOut = new ConcurrentQueue<Message>();
+        private readonly ConcurrentQueue<Message> _consumerTwoOut = new ConcurrentQueue<Message>();
 
         public override void Publish(Message message)
         {
@@ -17,7 +18,7 @@ namespace MessagingShootout.Scenarios
             _consumerTwoIn.Enqueue(message);
         }
 
-        private void ConsumeAndPublish(LockedQueue<Message> @in, LockedQueue<Message> @out, string name)
+        private void ConsumeAndPublish(ConcurrentQueue<Message> @in, ConcurrentQueue<Message> @out, string name)
         {
             int count = 0;
             Message msg;

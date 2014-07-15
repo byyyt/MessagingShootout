@@ -1,35 +1,34 @@
-using System;
-using System.Threading.Tasks.Dataflow;
+﻿using System;
 
-namespace MessagingShootout.Scenarios
+namespace MessagingShootout.Scenarios.LockedQueue
 {
-    [Scenario("Dataflow BufferBlock with 3 Fork/Join Consumers")]
-    public class DataflowBufferBlockForkJoinScenario : ThreeConsumerForkJoinScenario<Message>
+    [Scenario("Locked Queue with 3 Fork/Join Consumers")]
+    public class LockedQueueForkJoinScenario : ThreeConsumerForkJoinScenario<Message>
     {
-        private readonly BufferBlock<Message> _consumerOneIn = new BufferBlock<Message>();
-        private readonly BufferBlock<Message> _consumerTwoIn = new BufferBlock<Message>();
+        private readonly LockedQueue<Message> _consumerOneIn = new LockedQueue<Message>();
+        private readonly LockedQueue<Message> _consumerTwoIn = new LockedQueue<Message>();
 
-        private readonly BufferBlock<Message> _consumerOneOut = new BufferBlock<Message>();
-        private readonly BufferBlock<Message> _consumerTwoOut = new BufferBlock<Message>();
+        private readonly LockedQueue<Message> _consumerOneOut = new LockedQueue<Message>();
+        private readonly LockedQueue<Message> _consumerTwoOut = new LockedQueue<Message>();
 
         public override void Publish(Message message)
         {
-            _consumerOneIn.Post(message);
-            _consumerTwoIn.Post(message);
+            _consumerOneIn.Enqueue(message);
+            _consumerTwoIn.Enqueue(message);
         }
 
-        private void ConsumeAndPublish(BufferBlock<Message> @in, BufferBlock<Message> @out, string name)
+        private void ConsumeAndPublish(LockedQueue<Message> @in, LockedQueue<Message> @out, string name)
         {
             int count = 0;
             Message msg;
 
             while (true)
             {
-                var received = @in.TryReceive(out msg);
+                var received = @in.TryDequeue(out msg);
                 if (received)
                 {
                     count++;
-                    @out.Post(msg);
+                    @out.Enqueue(msg);
 
                     if (msg.Terminate)
                         break;
@@ -57,8 +56,8 @@ namespace MessagingShootout.Scenarios
 
             while (true)
             {
-                while (!_consumerOneOut.TryReceive(out msgOne)) { }
-                while (!_consumerTwoOut.TryReceive(out msgTwo)) { }
+                while (!_consumerOneOut.TryDequeue(out msgOne)) { }
+                while (!_consumerTwoOut.TryDequeue(out msgTwo)) { }
 
                 count++;
                 if (msgTwo.Terminate)
@@ -67,6 +66,5 @@ namespace MessagingShootout.Scenarios
 
             Console.WriteLine("Consumer three received {0:#,#;;0} joined messages.", count);
         }
-
     }
 }

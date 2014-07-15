@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks.Dataflow;
 
-namespace MessagingShootout.Scenarios
+namespace MessagingShootout.Scenarios.Dataflow
 {
     [Scenario("Dataflow JoinBlock 3 Fork/Join Consumers")]
     public class DataflowJoinBlockForkJoinScenario : ThreeConsumerForkJoinScenario<Message>
