@@ -32,6 +32,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Atomic">
+      <HintPath>..\libs\Atomic.dll</HintPath>
+    </Reference>
+    <Reference Include="Disruptor">
+      <HintPath>..\libs\Disruptor.dll</HintPath>
+    </Reference>
+    <Reference Include="Disruptor.Scheduler">
+      <HintPath>..\libs\Disruptor.Scheduler.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Threading.Tasks.Dataflow, Version=4.5.20.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -56,6 +65,7 @@
     <Compile Include="Scenario.cs" />
     <Compile Include="ScenarioAttribute.cs" />
     <Compile Include="Scenarios\ConcurrentQueue\ConcurrentQueueForkJoinScenario.cs" />
+    <Compile Include="Scenarios\Disruptor\DisruptorDslScenario.cs" />
     <Compile Include="Scenarios\LockedQueue\LockedQueue.cs" />
     <Compile Include="Scenarios\LockedQueue\LockedQueueForkJoinScenario.cs" />
     <Compile Include="Scenarios\LockedQueue\LockedQueueScenario.cs" />
