@@ -93,6 +93,9 @@ namespace MessagingShootout
             int selectedScenario;
             if (int.TryParse(selection, out selectedScenario))
             {
+                Console.WriteLine();
+                Console.WriteLine("Picked {0} scenario...", scenarios[selectedScenario - 1].Description);
+
                 return () => (Scenario<Message>) Activator.CreateInstance(scenarios[selectedScenario - 1].ScenarioType);
             }
 
