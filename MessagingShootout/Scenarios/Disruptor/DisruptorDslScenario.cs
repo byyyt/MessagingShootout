@@ -42,7 +42,7 @@ namespace MessagingShootout.Scenarios.Disruptor
         
         public DisruptorDslScenario()
         {
-            _disruptor = new Disruptor<Message>(() => new Message(), 1024, new RoundRobinThreadAffinedTaskScheduler(1));
+            _disruptor = new Disruptor<Message>(() => new Message(), new SingleThreadedClaimStrategy(4096), new YieldingWaitStrategy(), new RoundRobinThreadAffinedTaskScheduler(1));
             _handler = new Handler(_tcs);
 
             _disruptor.HandleEventsWith(_handler);

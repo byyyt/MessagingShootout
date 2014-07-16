@@ -38,16 +38,16 @@ namespace MessagingShootout
 
             scenario.StartScenario();
 
+            var msg = new Message
+            {
+                Value = "test",
+                Terminate = false
+            };
+
             int count = 0;
             var sw = Stopwatch.StartNew();
             while (sw.Elapsed.TotalSeconds < 10)
             {
-                var msg = new Message
-                {
-                    Value = "test",
-                    Terminate = false
-                };
-
                 scenario.Publish(msg);
                 count++;
             }
