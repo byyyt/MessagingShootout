@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Scenarios\BlockingCollection\BlockingCollectionForkJoinScenario.cs" />
+    <Compile Include="Scenarios\BlockingCollection\BlockingCollectionScenario.cs" />
     <Compile Include="Scenarios\ConcurrentQueue\ConcurrentQueueScenario.cs" />
     <Compile Include="Scenarios\Dataflow\DataflowBufferBlockForkJoinScenario.cs" />
     <Compile Include="Scenarios\Dataflow\DataflowActionBlockScenario.cs" />
